@@ -8,6 +8,7 @@ type AddCardFormProps = {
 };
 
 const AddCardForm: React.FC<AddCardFormProps> = (props) => {
+  const formRef = useRef<HTMLFormElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const dueDateRef = useRef<HTMLInputElement>(null);
@@ -17,47 +18,43 @@ const AddCardForm: React.FC<AddCardFormProps> = (props) => {
   const [show, setShow] = useState(false);
 
   const toggleShowFormHandler = (event: React.MouseEvent) => {
-    setShow(!show);
+    setShow(true);
   };
 
-  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setErrors([]);
+
+    const errs = [];
 
     const title = titleRef.current!.value;
     const description = descriptionRef.current!.value;
     const dueDate = dueDateRef.current!.value;
 
     if (!title) {
-      setErrors((errors) => [...errors, "Please enter a title for this card."]);
+      errs.push("Please enter a title for this card.");
     }
     if (!dueDate) {
-      setErrors((errors) => [
-        ...errors,
-        "Please enter a due date for this card.",
-      ]);
+      errs.push("Please enter a due date for this card.");
     }
 
-    if (errors.length > 0) {
+    if (errs.length > 0) {
+      setErrors(errs);
       return;
     }
 
-    createCard({
+    await createCard({
       variables: {
         title: title,
         description: description,
         dueDate: dueDate,
         boardId: props.boardId,
       },
-    })
-      .then(() => {
-        setShow(false);
-        event.currentTarget.reset();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    });
+
+    setShow(false);
+    formRef.current!.reset();
   };
 
   if (!show)
@@ -68,20 +65,29 @@ const AddCardForm: React.FC<AddCardFormProps> = (props) => {
     );
 
   return (
-    <form className="add-card-form" onSubmit={submitForm}>
+    <form ref={formRef} className="add-card-form" onSubmit={submitForm}>
+      <label htmlFor="title">Title:</label>
       <input
         type="text"
+        id="title"
         placeholder="Title e.g. Design a logo"
         ref={titleRef}
       />
+      <label htmlFor="description">Description:</label>
       <textarea
         rows={4}
+        id="description"
         placeholder="Description (optional)"
         ref={descriptionRef}
       ></textarea>
-      <input type="date" ref={dueDateRef} />
+      <label htmlFor="dueDate">Due Date:</label>
+      <input id="dueDate" type="date" ref={dueDateRef} />
       <div className="form-buttons">
-        <button onClick={toggleShowFormHandler} className="secondary-button">
+        <button
+          type="button"
+          onClick={() => setShow(false)}
+          className="secondary-button"
+        >
           Cancel
         </button>
         <button type="submit" className="primary-button">

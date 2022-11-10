@@ -1,10 +1,26 @@
 .cards-list {
     width: 100%;
     padding: 0 1rem;
+    margin: 0 0 2rem;
+}
+
+.cards-list-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 10rem;
+    background: #efefef;
+    border: 2px dashed #333;
+    margin: 0 0 1rem;
 }
 
 .cards-list ul {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 1rem;
+    background: rgb(100,100,100);
+}
+
+.cards-list ul.droppable {
+    background: rgb(255,255,255);
 }

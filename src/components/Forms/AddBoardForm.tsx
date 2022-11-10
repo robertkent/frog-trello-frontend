@@ -4,12 +4,13 @@ import "./Inputs.css";
 import { useCreateBoardMutation } from "../../queries/createBoard";
 
 const AddBoardForm: React.FC = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [errors, setErrors] = useState<string[]>([]);
 
   const [createBoard] = useCreateBoardMutation();
 
-  const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrors([]);
     const title = inputRef.current!.value;
@@ -19,18 +20,14 @@ const AddBoardForm: React.FC = () => {
       return;
     }
 
-    createBoard({ variables: { title: title } })
-      .then(() => {
-        event.currentTarget.reset();
-      })
-      .catch((errors) => {
-        console.log(errors);
-      });
+    await createBoard({ variables: { title: title } });
+
+    formRef.current!.reset();
   };
 
   return (
     <div className="board-container">
-      <form onSubmit={submitHandler} className="add-board-form">
+      <form ref={formRef} onSubmit={submitHandler} className="add-board-form">
         <input
           type="text"
           ref={inputRef}

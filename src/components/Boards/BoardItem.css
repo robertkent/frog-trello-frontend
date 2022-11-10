@@ -1,11 +1,15 @@
 .board-item {
-    background: rgba(202,210,210, 1);
+    background: rgba(20,21,24, 1);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     height: 100%;
     border-radius: 1rem 1rem 0 0;
+}
+
+.board-item h2 {
+    color: #fff;
 }
 
 .delete-board {

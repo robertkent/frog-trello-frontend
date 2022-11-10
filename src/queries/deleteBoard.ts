@@ -12,7 +12,7 @@ const DELETE_BOARD = gql`
 `;
 
 interface DefineDeleteBoardResponse {
-  createPost: Board;
+  deleteBoard: Board;
 }
 
 interface DefineDeleteBoardVariables {
@@ -23,10 +23,7 @@ export function useDeleteBoardMutation() {
   return useMutation<DefineDeleteBoardResponse, DefineDeleteBoardVariables>(
     DELETE_BOARD,
     {
-      refetchQueries: [
-        { query: GET_BOARDS }, // DocumentNode object parsed with gql
-        "getBoards", // Query name
-      ],
+      refetchQueries: [{ query: GET_BOARDS }, "getBoards"],
     }
   );
 }

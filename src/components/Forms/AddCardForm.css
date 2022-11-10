@@ -1,7 +1,14 @@
 .add-card-form {
     background: rgba(20,21,24, 1);
     padding: 1rem;
-    border-radius: 1rem;
+}
+
+.add-card-form label {
+    color: #fff;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+    display: block;
 }
 
 .form-buttons {
