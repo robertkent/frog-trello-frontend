@@ -1,0 +1,26 @@
+.board-item {
+    background: rgba(202,210,210, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.delete-board {
+    margin-top: auto;
+    appearance: none;
+    border: 0;
+    background: #a12c2c;
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.delete-board:hover {
+    background: #c25050;
+}

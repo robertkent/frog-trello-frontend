@@ -1,0 +1,15 @@
+.add-board-form {
+    background: rgba(20,21,24, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-radius: 1rem;
+    padding: 0 1rem;
+}
+
+.error {
+    font-size: 1rem;
+    color: #a81616;
+}

@@ -1,0 +1,15 @@
+.add-card-form {
+    background: rgba(20,21,24, 1);
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.form-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-buttons > button {
+    margin: 0 0.5rem;
+}
